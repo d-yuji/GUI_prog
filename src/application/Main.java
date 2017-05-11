@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -21,15 +23,18 @@ public class Main extends Application {
 					}
 				}
 			);
-
-			StackPane root = new StackPane();
+			StackPane root = new StackPane();//Pane:コンポーネントを埋め込む
+			BorderPane pane = new BorderPane();
+			Label label = new Label("This is JavaFX!");
 			root.getChildren().add(btn);
-			Scene scene = new Scene(root, 300, 250);
-			primaryStage.setTitle("Hello World!");
-			primaryStage.setScene(scene);
-			primaryStage.show();
+			pane.setCenter(label);
+			pane.setBottom(btn);
+			Scene scene = new Scene(pane, 300, 250);
+			primaryStage.setTitle("icontest");
+			primaryStage.setScene(scene);//Scene:表示する内容を組み込む
+			primaryStage.show();//ウィンドウの表示
 	}
 	public static void main(String[] args) {
-		launch(args);
+		launch(args);//GUIの起動
 	}
 }
