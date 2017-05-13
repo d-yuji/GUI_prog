@@ -29,7 +29,8 @@ public class Main extends Application {
 			root.getChildren().add(btn);
 			pane.setCenter(label);
 			pane.setBottom(btn);
-			Scene scene = new Scene(pane, 300, 250);
+			Scene scene = new Scene(pane, 1366, 768);
+
 			primaryStage.setTitle("icontest");
 			primaryStage.setScene(scene);//Scene:表示する内容を組み込む
 			primaryStage.show();//ウィンドウの表示
