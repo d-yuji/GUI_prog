@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -15,14 +16,17 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 			Button btn = new Button();
-			btn.setText("Say 'Hello World'");
+			FileChooser file = new FileChooser();
+			btn.setText("open file");
 			btn.setOnAction(new EventHandler<ActionEvent>() {
 					@Override
 					public void handle(ActionEvent event) {
-						System.out.println("Hello World!");
+//						System.out.println("Hello World!");
+						file.showOpenDialog(primaryStage);
 					}
 				}
 			);
+
 			StackPane root = new StackPane();//Pane:コンポーネントを埋め込む
 			BorderPane pane = new BorderPane();
 			Label label = new Label("This is JavaFX!");
