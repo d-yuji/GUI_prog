@@ -11,6 +11,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
@@ -25,27 +27,30 @@ public class Main extends Application {
 			FileChooser fc = new FileChooser();
 			StackPane root = new StackPane();//Pane:コンポーネントを埋め込む
 			BorderPane pane = new BorderPane();
+			Image img = new Image("application/icon.png");
+			ImageView imgView = new ImageView();
+			imgView.setImage(img);
+//			HBox box = new HBox();
+//			box.getChildren().add(imgView);
+//			root.getChildren().add( box );
 			fc.getExtensionFilters().addAll(
 						new ExtensionFilter("Text Files", "*.txt"),
 						new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"),
 						new ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac"),
-						new ExtensionFilter("All Files", "*.*"));
-
+						new ExtensionFilter("All Files", "*.*")
+			);
 			btn.setText("open file");
 			btn.setOnAction(new EventHandler<ActionEvent>() {
 					@Override
 					public void handle(ActionEvent event) {
-//						System.out.println("Hello World!");
 						File openFile = fc.showOpenDialog(primaryStage);
 						if(openFile != null){
 							System.out.println("get file path");
-//							fc.showSaveDialog(primaryStage);
 							try {
 								Writer writer = new FileWriter(fc.showSaveDialog(primaryStage));
-								writer.write("test");
+//								writer.write("test");
 								writer.close();
 							} catch (IOException e) {
-								// TODO 自動生成された catch ブロック
 								e.printStackTrace();
 							}
 						}
@@ -55,11 +60,12 @@ public class Main extends Application {
 
 
 			Label label = new Label("This is JavaFX!");
-			root.getChildren().add(btn);
+//			root.getChildren().add(btn);
+			pane.setRight(imgView);
 			pane.setCenter(label);
 			pane.setBottom(btn);
 			Scene scene = new Scene(pane, 1366, 768);
-
+			primaryStage.getIcons().add(new Image("application/icon.png"));
 			primaryStage.setTitle("icontest");
 			primaryStage.setScene(scene);//Scene:表示する内容を組み込む
 			primaryStage.show();//ウィンドウの表示
