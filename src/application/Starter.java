@@ -13,15 +13,12 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class Starter extends Application {
-
+	SceneState state = SceneState.CONTENT;
 	@Override
 	public void start(Stage primaryStage) {
 			Button btn = new Button();
@@ -56,13 +53,7 @@ public class Starter extends Application {
 				}
 			);
 
-
-			Text text = new Text("text migu1");
-			text.setFont( Font.loadFont( "application/res/fonts/migu-1c-regular.tff" , 200 ) );
-			VBox root = new VBox();
-			root.getChildren().add(text);
 			pane.setRight(imgView);
-			pane.setCenter(root);
 			pane.setBottom(btn);
 			Scene scene = new Scene(pane, 1366, 768);
 			scene.getStylesheets().add("application/css/application.css");
