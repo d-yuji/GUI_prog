@@ -33,4 +33,24 @@ public class ContentScene extends AbstractScene {
 
 	}
 
+	public void loadContent(){
+
+	}
+
+	public void showContentData(){
+
+	}
+
+	public void addImage(){
+
+	}
+	public void editImage(){
+
+	}
+	public void saveText(){
+
+	}
+	public void fileOpen(){
+
+	}
 }
