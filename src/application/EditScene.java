@@ -28,5 +28,16 @@ public class EditScene extends AbstractScene {
 		// TODO 自動生成されたメソッド・スタブ
 
 	}
+	public void addImage(){
 
+	}
+	public void editImage(){
+
+	}
+	public void saveText(){
+
+	}
+	public void fileOpen(){
+
+	}
 }

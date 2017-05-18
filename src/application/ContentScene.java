@@ -41,16 +41,4 @@ public class ContentScene extends AbstractScene {
 
 	}
 
-	public void addImage(){
-
-	}
-	public void editImage(){
-
-	}
-	public void saveText(){
-
-	}
-	public void fileOpen(){
-
-	}
 }
