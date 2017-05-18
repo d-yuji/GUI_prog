@@ -10,29 +10,27 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Starter extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
 			Button btn = new Button();
 			FileChooser fc = new FileChooser();
-			StackPane root = new StackPane();//Pane:コンポーネントを埋め込む
 			BorderPane pane = new BorderPane();
-			Image img = new Image("application/icon.png");
+			Image img = new Image("application/res/images/icon.png");
 			ImageView imgView = new ImageView();
 			imgView.setImage(img);
-//			HBox box = new HBox();
-//			box.getChildren().add(imgView);
-//			root.getChildren().add( box );
+
 			fc.getExtensionFilters().addAll(
 						new ExtensionFilter("Text Files", "*.txt"),
 						new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"),
@@ -59,13 +57,16 @@ public class Main extends Application {
 			);
 
 
-			Label label = new Label("This is JavaFX!");
-//			root.getChildren().add(btn);
+			Text text = new Text("text migu1");
+			text.setFont( Font.loadFont( "application/res/fonts/migu-1c-regular.tff" , 200 ) );
+			VBox root = new VBox();
+			root.getChildren().add(text);
 			pane.setRight(imgView);
-			pane.setCenter(label);
+			pane.setCenter(root);
 			pane.setBottom(btn);
 			Scene scene = new Scene(pane, 1366, 768);
-			primaryStage.getIcons().add(new Image("application/icon.png"));
+			scene.getStylesheets().add("application/css/application.css");
+			primaryStage.getIcons().add(new Image("application/res/images/icon.png"));
 			primaryStage.setTitle("icontest");
 			primaryStage.setScene(scene);//Scene:表示する内容を組み込む
 			primaryStage.show();//ウィンドウの表示
