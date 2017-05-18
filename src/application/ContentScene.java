@@ -7,7 +7,7 @@ public class ContentScene extends AbstractScene {
 	private String bookTitle;
 	private String bookAuthor;
 	private String pageNum;
-	private String publiser;
+	private String publisher;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
