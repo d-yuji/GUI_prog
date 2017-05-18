@@ -18,7 +18,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class Starter extends Application {
-	SceneState state = SceneState.CONTENT;
+	SceneState startState = SceneState.CONTENT;
 
 	@Override
 	public void start(Stage primaryStage) {
