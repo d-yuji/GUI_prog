@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 public class Starter extends Application {
 	SceneState state = SceneState.CONTENT;
+
 	@Override
 	public void start(Stage primaryStage) {
 			Button btn = new Button();
