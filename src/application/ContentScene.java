@@ -4,6 +4,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class ContentScene extends AbstractScene {
+	private String bookTitle;
+	private String bookAuthor;
+	private String pageNum;
+	private String publiser;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
