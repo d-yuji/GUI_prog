@@ -34,7 +34,7 @@ public class EditScene extends AbstractScene {
 					new ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac"),
 					new ExtensionFilter("All Files", "*.*")
 		);
-		btn.setText("move state");
+		btn.setText("move content");
 		fopen.setText("open file");
 		fsave.setText("save File");
 
@@ -73,7 +73,6 @@ public class EditScene extends AbstractScene {
 					}
 				}
 		});
-//		pane.setCenter(new Label("edit"));
 		box .getChildren().add(fopen);
 		box.getChildren().add(fsave);
 		pane.setBottom(btn);
@@ -122,6 +121,7 @@ public class EditScene extends AbstractScene {
 		File openFile = fc.showOpenDialog(stage);
 		if(openFile != null){
 			try {
+				@SuppressWarnings("resource")
 				String text = new Scanner(openFile).useDelimiter("\\Z").next();
 				area.setText(text);
 			} catch (IOException e) {

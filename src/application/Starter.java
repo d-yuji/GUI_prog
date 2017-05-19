@@ -39,7 +39,7 @@ public class Starter extends Application {
 			pane.setBottom(new Label("Starter"));
 			Scene scene = new Scene(pane, 1366, 768);
 			primaryStage.getIcons().add(new Image("application/res/images/icon.png"));
-			primaryStage.setTitle("icontest");
+			primaryStage.setTitle("Book Saver");
 			primaryStage.setScene(scene);//Scene:表示する内容を組み込む
 			primaryStage.show();//ウィンドウの表示
 
