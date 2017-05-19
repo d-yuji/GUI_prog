@@ -1,5 +1,9 @@
 package application;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -44,7 +48,7 @@ public class EditScene extends AbstractScene {
 			@Override
 			public void handle(ActionEvent event) {
 					try {
-
+							fileOpen(fc,primaryStage,pane);
 					} catch (Exception e) {
 						// TODO 自動生成された catch ブロック
 						e.printStackTrace();
@@ -84,20 +88,17 @@ public class EditScene extends AbstractScene {
 	public void saveText(){
 
 	}
-	public void fileOpen(FileChooser fc){
-
+	private static void fileOpen(FileChooser fc,Stage stage,BorderPane pane){
+		File openFile = fc.showOpenDialog(stage);
+		if(openFile != null){
+			try {
+				String text = new Scanner(openFile).useDelimiter("\\Z").next();
+				pane.setLeft(new Label(text));
+//				Writer writer = new FileWriter(fc.showSaveDialog(stage));
+//				writer.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
-
-
-/*File openFile = fc.showOpenDialog(primaryStage);
-if(openFile != null){
-	System.out.println("get file path");
-	try {
-		Writer writer = new FileWriter(fc.showSaveDialog(primaryStage));
-//		writer.write("test");
-		writer.close();
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
-}*/
