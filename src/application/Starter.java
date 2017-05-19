@@ -1,21 +1,19 @@
 package application;
 
+import java.io.IOException;
+
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Starter extends Application {
 	private static AbstractScene sceneContent = new ContentScene();
 	@Override
 	public void start(Stage primaryStage) {
-			Button btn = new Button();
+/*			Button btn = new Button();
 			BorderPane pane = new BorderPane();
 			Image img = new Image("application/res/images/icon.png");
 			ImageView imgView = new ImageView();
@@ -42,7 +40,18 @@ public class Starter extends Application {
 			primaryStage.setTitle("Book Saver");
 			primaryStage.setScene(scene);//Scene:表示する内容を組み込む
 			primaryStage.show();//ウィンドウの表示
-
+	*/
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("../fxml/Starter.fxml"));
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.getIcons().add(new Image("application/res/images/icon.png"));
+			primaryStage.show();
+		} catch (IOException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 	}
 	public static void main(String[] args) {
 		launch(args);//GUIの起動
