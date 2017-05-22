@@ -57,7 +57,6 @@ public class Starter extends Application {
 		Parent root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("../fxml/Starter.fxml"));
-//			root = FXMLLoader.load(getClass().getResource("Starter.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.getIcons().add(new Image("application/res/images/icon.png"));
