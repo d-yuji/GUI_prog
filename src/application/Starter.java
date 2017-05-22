@@ -16,9 +16,11 @@ public class Starter extends Application {
 	private static AbstractScene sceneContent = new ContentScene();
 
 	@FXML Button Button1;
+
 	@FXML
-	protected void doAction(ActionEvent ev){
+	public void doAction(ActionEvent ev){
 //		sceneContent.start(primaryStage);
+		System.out.println("Hello World");
 	}
 
 	@Override
@@ -55,6 +57,7 @@ public class Starter extends Application {
 		Parent root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("../fxml/Starter.fxml"));
+//			root = FXMLLoader.load(getClass().getResource("Starter.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.getIcons().add(new Image("application/res/images/icon.png"));
