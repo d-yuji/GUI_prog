@@ -68,10 +68,10 @@ public class ContentScene extends AbstractScene {
 
 	}
 
+	@SuppressWarnings("resource")
 	public void loadContent(Pane pane){
 		String url = "src/data/";
 		File dirPath = new File(url);
-		File openFile = null;
 		File[] files = dirPath.listFiles();
 		String text;
 		int i = 0;
