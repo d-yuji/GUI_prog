@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<TitledPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="1152.0" text="CONTENT" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <contextMenu>
+      <ContextMenu>
+        <items>
+            <MenuItem mnemonicParsing="false" text="menu2" />
+          <MenuItem mnemonicParsing="false" text="menu1" />
+        </items>
+      </ContextMenu>
+   </contextMenu>
+</TitledPane>

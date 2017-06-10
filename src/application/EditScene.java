@@ -11,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -19,7 +18,7 @@ import javafx.stage.Stage;
 
 public class EditScene extends AbstractScene {
 	private static AbstractScene content = new ContentScene();
-	@Override
+
 	public void start(Stage primaryStage) throws Exception {
 		Button btn = new Button();
 		Button fopen = new Button();
@@ -43,7 +42,7 @@ public class EditScene extends AbstractScene {
 			@Override
 			public void handle(ActionEvent event) {
 					try {
-						content.start(primaryStage);
+
 					} catch (Exception e) {
 						// TODO 自動生成された catch ブロック
 						e.printStackTrace();
@@ -82,23 +81,6 @@ public class EditScene extends AbstractScene {
 		primaryStage.setScene(scene);//Scene:表示する内容を組み込む
 	}
 
-	@Override
-	public Pane loadFXMLLayout() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
-	@Override
-	public void showLayout() {
-		// TODO 自動生成されたメソッド・スタブ
-
-	}
-
-	@Override
-	public void moveScene() {
-		// TODO 自動生成されたメソッド・スタブ
-
-	}
 	public void addImage(){
 
 	}
