@@ -10,6 +10,11 @@
         <items>
             <MenuItem mnemonicParsing="false" text="menu2" />
           <MenuItem mnemonicParsing="false" text="menu1" />
+            <Menu mnemonicParsing="false" text="Unspecified Menu">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
         </items>
       </ContextMenu>
    </contextMenu>

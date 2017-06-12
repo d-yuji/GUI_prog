@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class MainWindow extends Application {
 	public static MainWindow singleton;
 	private Parent root;
-	private Stage stage;
+	Stage stage;
 	private  int pageIndex = 4;
 	private Image iconImage = new Image("application/res/images/icon.png");
 	private SceneState state;
@@ -65,6 +65,9 @@ public class MainWindow extends Application {
 	}
 	public static MainWindow getInstance(){
 		return singleton;
+	}
+	public void ShowStage(){
+		stage.show();
 	}
 	public static void main(String[] args){
 		System.out.println("Start");

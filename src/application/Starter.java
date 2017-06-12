@@ -10,12 +10,12 @@ public class Starter{
 	@FXML
 	public void doAction(ActionEvent ev){
 		try {
-			MainWindow.singleton.changePage(SceneState.CONTENT);
+			MainWindow.singleton.changePage(SceneState.LIST);
 		} catch (Exception e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-		System.out.println("Hello World");
+		//System.out.println("Hello World");
 	}
 
 }

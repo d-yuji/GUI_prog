@@ -11,8 +11,8 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="Button1" layoutX="362.0" layoutY="300.0" mnemonicParsing="false" onAction="#doAction" text="Start Application" />
-            <Label layoutX="371.0" layoutY="123.0" prefHeight="9.0" prefWidth="82.0" text="Hello World" />
+            <Button fx:id="Button1" layoutX="397.0" layoutY="312.0" mnemonicParsing="false" onAction="#doAction" text="Start Application" />
+            <Label layoutX="413.0" layoutY="125.0" prefHeight="9.0" prefWidth="82.0" text="Hello World" />
          </children>
     </AnchorPane>
   </children>
