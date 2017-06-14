@@ -25,7 +25,7 @@ public class ContentScene {
 
 	@SuppressWarnings("resource")
 	public void loadContent(Pane pane){
-		String url = "src/data/";
+		String url = "src/bookdata/txt";
 		File dirPath = new File(url);
 		File[] files = dirPath.listFiles();
 		String text;
