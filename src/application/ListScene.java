@@ -8,26 +8,32 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 
-public class ListScene extends AbstractScene {
+public class ListScene{
 	FileChooser fc = new FileChooser();
 
 	@FXML Button Content1;
 	@FXML Button Content2;
 	@FXML Button Content3;
+	@FXML Button Content4;
 	@FXML TextArea text;
 	@FXML TextArea text2;
 	@FXML GridPane gridPane;
 	@FXML MenuItem idOpen;
+	@FXML MenuItem idClose;
+	@FXML TabPane tab;
 
 	@FXML
 	public void doAction(ActionEvent ev){
+
 		try {
 			Button btn = new Button();
-			btn.setText("added Button");
+			btn.setText("add");
 			gridPane.getChildren().add( btn);
 			System.out.println("add");
 			MainWindow.singleton.ShowStage();
@@ -36,6 +42,7 @@ public class ListScene extends AbstractScene {
 			e.printStackTrace();
 		}
 		//System.out.println("Hello World");
+		return;
 	}
 	@FXML
 	public void changeState(ActionEvent ev){
@@ -44,6 +51,7 @@ public class ListScene extends AbstractScene {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		return;
 	}
 	@FXML
 	public void Load(ActionEvent ev){
@@ -62,6 +70,7 @@ public class ListScene extends AbstractScene {
 			}
 			i++;
 		}
+		return;
 	}
 	public void openFile(ActionEvent ev){
 		System.out.println("open");
@@ -76,6 +85,14 @@ public class ListScene extends AbstractScene {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-
+		return;
+	}
+	public void addTabitem(ActionEvent ev){
+		tab.getTabs().add(new Tab ("Add tab"));
+		return;
+	}
+	public void closeEvent(ActionEvent ev){
+		System.exit(0);
+		return;
 	}
 }

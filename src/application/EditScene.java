@@ -16,8 +16,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
-public class EditScene extends AbstractScene {
-	private static AbstractScene content = new ContentScene();
+public class EditScene  {
 
 	public void start(Stage primaryStage) throws Exception {
 		Button btn = new Button();

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.web.*?>
+<?import javafx.scene.media.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
@@ -31,11 +33,11 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button fx:id="Content1" mnemonicParsing="false" onAction="#Load" text="Content1" GridPane.columnIndex="1" />
-                                    <Button fx:id="Content2" mnemonicParsing="false" onAction="#doAction" text="Content2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Button fx:id="Content3" mnemonicParsing="false" onAction="#changeState" text="Content3" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <Button mnemonicParsing="false" text="Content4" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Button mnemonicParsing="false" text="Content5" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Button fx:id="Content1" mnemonicParsing="false" onAction="#Load" text="LoadData" GridPane.columnIndex="1" />
+                                    <Button fx:id="Content2" mnemonicParsing="false" onAction="#doAction" text="AddButton" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Button fx:id="Content3" mnemonicParsing="false" onAction="#changeState" text="MoveContent" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Button fx:id="Content4" mnemonicParsing="false" onAction="#addTabitem" text="Button4" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Button mnemonicParsing="false" text="Button5" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                  </children>
                               </GridPane>
                            </children>
@@ -76,6 +78,15 @@
                         </AnchorPane>
                   </content>
                 </Tab>
+                  <Tab text="Open">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox layoutX="208.0" layoutY="8.0" prefHeight="563.0" prefWidth="405.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
               </tabs>
             </TabPane>
          </center>
@@ -87,7 +98,7 @@
                         <MenuItem fx:id="idOpen" mnemonicParsing="false" onAction="#openFile" text="Open" />
                         <MenuItem mnemonicParsing="false" text="New File" />
                         <MenuItem mnemonicParsing="false" text="Save" />
-                    <MenuItem mnemonicParsing="false" text="Close" />
+                    <MenuItem fx:id="idClose" mnemonicParsing="false" onAction="#closeEvent" text="Close" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
@@ -100,6 +111,11 @@
                     <MenuItem mnemonicParsing="false" text="About" />
                   </items>
                 </Menu>
+                  <Menu mnemonicParsing="false" text="Unspecified Menu">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                  </Menu>
               </menus>
             </MenuBar>
          </top>

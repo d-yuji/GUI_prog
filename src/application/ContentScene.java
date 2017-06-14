@@ -4,18 +4,24 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 
-public class ContentScene extends AbstractScene {
+public class ContentScene {
 
 	private String bookTitle;
 	private String bookAuthor;
 	private String pageNum;
 	private String publisher;
 
-
-
+	@FXML MenuItem backButtonMenu;
+	public void backButton(ActionEvent ev){
+		MainWindow.singleton.changePage(SceneState.LIST);
+		return;
+	}
 
 	@SuppressWarnings("resource")
 	public void loadContent(Pane pane){
