@@ -5,7 +5,12 @@ GUI programmig study for research
 
 * Java (Java8)
 * CSS (CSS3)
-* XML
+* XML(FXML)
 
 ## library
 * JavaFX
+* DOM
+
+## Memo
+* コミットをまめにする
+* コミットメッセージをちゃんと書く
