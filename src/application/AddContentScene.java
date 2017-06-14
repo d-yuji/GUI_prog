@@ -1,30 +1,15 @@
 package application;
 
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-
 public class AddContentScene extends AbstractScene {
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void sceneChange() {
 		// TODO 自動生成されたメソッド・スタブ
 
 	}
 
 	@Override
-	public Pane loadFXMLLayout() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
-	@Override
-	public void showLayout() {
-		// TODO 自動生成されたメソッド・スタブ
-
-	}
-
-	@Override
-	public void moveScene() {
+	public void closeEvent() {
 		// TODO 自動生成されたメソッド・スタブ
 
 	}
