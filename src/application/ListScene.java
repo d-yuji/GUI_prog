@@ -55,7 +55,7 @@ public class ListScene{
 	}
 	@FXML
 	public void Load(ActionEvent ev){
-		String url = "src/data/";
+		String url = "src/bookdata/txt";
 		File dirPath = new File(url);
 		File[] files = dirPath.listFiles();
 		String loadtext;
