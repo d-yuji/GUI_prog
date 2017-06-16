@@ -31,7 +31,7 @@
       </MenuBar>
    </top>
    <center>
-      <Hyperlink fx:id="Start" onAction="#doAction" style="-fx-border-radius: 5px;" text="StartApplication" BorderPane.alignment="CENTER">
+      <Hyperlink fx:id="Start" onAction="#changeScene" style="-fx-border-radius: 5px;" text="StartApplication" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="44.0" />
          </font>

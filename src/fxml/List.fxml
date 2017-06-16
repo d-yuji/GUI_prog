@@ -35,8 +35,8 @@
                                  <children>
                                     <Button fx:id="Content1" mnemonicParsing="false" onAction="#Load" text="LoadData" GridPane.columnIndex="1" />
                                     <Button fx:id="Content2" mnemonicParsing="false" onAction="#doAction" text="AddButton" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Button fx:id="Content3" mnemonicParsing="false" onAction="#changeState" text="MoveContent" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <Button fx:id="Content4" mnemonicParsing="false" onAction="#addTabitem" text="Button4" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Button fx:id="Content3" mnemonicParsing="false" onAction="#changeScene" text="MoveContent" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Button fx:id="Content4" mnemonicParsing="false" onAction="#loadXML" text="ReadXML" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <Button mnemonicParsing="false" text="Button5" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                  </children>
                               </GridPane>
@@ -60,7 +60,7 @@
          <center>
             <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
-                <Tab text="Open">
+                <Tab text="Open_text">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -78,9 +78,9 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                  <Tab text="Open">
+                  <Tab text="XML_Data">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" fx:id="xmlTab">
                            <children>
                               <VBox layoutX="208.0" layoutY="8.0" prefHeight="563.0" prefWidth="405.0" />
                            </children>
