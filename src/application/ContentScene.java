@@ -1,52 +1,49 @@
 package application;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 
 public class ContentScene {
+	@FXML MenuItem BackListMenu;
+	@FXML MenuItem SaveAll;
+	@FXML MenuItem OpenImage;
+	@FXML MenuItem SaveImage;
+	@FXML MenuItem Undo;
+	@FXML MenuItem Clear;
+	@FXML MenuItem About;
 
-	private String bookTitle;
-	private String bookAuthor;
-	private String pageNum;
-	private String publisher;
+	@FXML ImageView BookImage;
+	@FXML Rectangle ImageArea;
 
-	@FXML MenuItem backButtonMenu;
+	@FXML TextField NameText;
+	@FXML TextField AuthorText;
+	@FXML TextField PageNum;
+	@FXML TextField PubliserText;
+	@FXML TextArea MemoText;
+
 	public void backButton(ActionEvent ev){
 		MainWindow.singleton.changePage(SceneState.LIST);
 		return;
 	}
-
-	@SuppressWarnings("resource")
-	public void loadContent(Pane pane){
-		String url = "src/bookdata/txt";
-		File dirPath = new File(url);
-		File[] files = dirPath.listFiles();
-		String text;
-		int i = 0;
-		while(files.length>i){
-			try {
-//					System.out.println(i+":"+files[i].getName());
-				pane.getChildren().add(new Label((i+1)+":"+files[i].getName()+"\n\n"));
-				text = new Scanner(files[i]).useDelimiter("\\Z").next();
-				pane.getChildren().add(new Label(text));
-			} catch (FileNotFoundException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
-			i++;
-		}
+	public void saveAllText(ActionEvent ev){
+		return;
 	}
-
-
-	public void showContentData(){
-
+	public void openImage(ActionEvent ev){
+		return;
+	}
+	public void SaveImage(ActionEvent ev){
+		return;
+	}
+	public void undo(ActionEvent ev){
+		return;
+	}
+	public void clear(ActionEvent ev){
+		return;
 	}
 
 }
