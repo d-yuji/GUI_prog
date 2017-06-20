@@ -47,7 +47,7 @@ public class ContentScene {
 	@FXML TextField NameText;
 	@FXML TextField AuthorText;
 	@FXML TextField PageNum;
-	@FXML TextField PubliserText;
+	@FXML TextField PublisherText;
 	@FXML TextArea MemoText;
 
 	public void backButton(ActionEvent ev){
@@ -58,33 +58,45 @@ public class ContentScene {
 		String url = "src/bookdata/xml";
 		File dirPath = new File(url);
 		File[] files = dirPath.listFiles();
-		//String filename = "data_"+(files.length+1)+".xml" ;
+		//String filename = "/data_"+2+".xml" ;
 		//System.out.println(filename);
-		String filename = "data_1.xml";
+		String filename = "/data_1.xml";
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = dbf.newDocumentBuilder();
-		Document doc = db.parse(new FileInputStream(url+"/data_1.xml"));
+		Document doc = db.parse(new FileInputStream(url+filename));
 		Element root = doc.getDocumentElement();
 		walkXML(root);
 		TransformerFactory tff = TransformerFactory.newInstance();
 		Transformer tf = tff.newTransformer();
 		tf.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-		tf.transform(new DOMSource(doc), new StreamResult(url+"/data_1.xml"));
+		tf.transform(new DOMSource(doc), new StreamResult(url+filename));
 		return;
 	}
 
 	public void walkXML(org.w3c.dom.Node node){
 		for(org.w3c.dom.Node ch = node.getFirstChild(); ch != null; ch = ch.getNextSibling()){
-
 			if(ch.getNodeType() == Node.ELEMENT_NODE){
 				walkXML(ch);
 			}
 			else if(ch.getNodeType() == Node.TEXT_NODE && ch.getNodeValue().trim().length() !=0){
-				if(ch.getParentNode().getNodeName() == "img"){
-					System.out.println("Now not implement");
-				}
-				else if(ch.getParentNode().getNodeName() == "name"){
-					ch.setNodeValue(NameText.getText());
+				switch(ch.getParentNode().getNodeName()){
+					case "name":
+						ch.setNodeValue(NameText.getText());
+						break;
+					case "author":
+						ch.setNodeValue(AuthorText.getText());
+						break;
+					case "publisher":
+						ch.setNodeValue(PublisherText.getText());
+						break;
+					case "img":
+						break;
+					case "page":
+						ch.setNodeValue(PageNum.getText());
+						break;
+					case "memo":
+						ch.setNodeValue(MemoText.getText());
+						break;
 				}
 			}
 		}

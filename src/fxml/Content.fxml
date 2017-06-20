@@ -60,7 +60,7 @@
                   <TextField fx:id="NameText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="AuthorText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="PageNum" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="PubliserText" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="PublisherText" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
                         <Label layoutX="121.0" layoutY="19.0" text="Title name" />
