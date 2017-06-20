@@ -1,14 +1,20 @@
 package application;
 
+import java.io.File;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class ContentScene {
+
 	@FXML MenuItem BackListMenu;
 	@FXML MenuItem SaveAll;
 	@FXML MenuItem OpenImage;
@@ -34,6 +40,20 @@ public class ContentScene {
 		return;
 	}
 	public void openImage(ActionEvent ev){
+		FileChooser fc = new FileChooser();
+		fc.getExtensionFilters().addAll(
+				new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"),
+				new ExtensionFilter("All Files", "*.*")
+		);
+		try{
+			File openFile = fc.showOpenDialog(MainWindow.singleton.stage);
+			Image openimage = new Image(openFile.toURI().toString());
+			BookImage.setImage(openimage);
+			ImageArea.setOpacity(0);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
 		return;
 	}
 	public void SaveImage(ActionEvent ev){

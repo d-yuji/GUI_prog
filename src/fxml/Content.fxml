@@ -19,7 +19,7 @@
           <Menu mnemonicParsing="false" text="Edit">
             <items>
               <MenuItem fx:id="SaveAll" mnemonicParsing="false" text="Save all" />
-                  <MenuItem fx:id="OpenImage" mnemonicParsing="false" text="open image" />
+                  <MenuItem fx:id="OpenImage" mnemonicParsing="false" onAction="#openImage" text="open image" />
                   <MenuItem fx:id="SaveImage" mnemonicParsing="false" text="save image" />
                   <MenuItem fx:id="Undo" mnemonicParsing="false" text="Undo" />
                   <MenuItem fx:id="Clear" mnemonicParsing="false" text="Clear" />
