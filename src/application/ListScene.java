@@ -147,7 +147,6 @@ public class ListScene extends AbstractScene{
 
 	@Override
 	public void initialize() {
-		// TODO 自動生成されたメソッド・スタブ
 
 	}
 
