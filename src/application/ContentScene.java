@@ -1,6 +1,24 @@
 package application;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.soap.Node;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,9 +54,42 @@ public class ContentScene {
 		MainWindow.singleton.changePage(SceneState.LIST);
 		return;
 	}
-	public void saveAllText(ActionEvent ev){
+	public void saveAllText(ActionEvent ev) throws FileNotFoundException, SAXException, IOException, ParserConfigurationException, TransformerException{
+		String url = "src/bookdata/xml";
+		File dirPath = new File(url);
+		File[] files = dirPath.listFiles();
+		//String filename = "data_"+(files.length+1)+".xml" ;
+		//System.out.println(filename);
+		String filename = "data_1.xml";
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		DocumentBuilder db = dbf.newDocumentBuilder();
+		Document doc = db.parse(new FileInputStream(url+"/data_1.xml"));
+		Element root = doc.getDocumentElement();
+		walkXML(root);
+		TransformerFactory tff = TransformerFactory.newInstance();
+		Transformer tf = tff.newTransformer();
+		tf.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+		tf.transform(new DOMSource(doc), new StreamResult(url+"/data_1.xml"));
 		return;
 	}
+
+	public void walkXML(org.w3c.dom.Node node){
+		for(org.w3c.dom.Node ch = node.getFirstChild(); ch != null; ch = ch.getNextSibling()){
+
+			if(ch.getNodeType() == Node.ELEMENT_NODE){
+				walkXML(ch);
+			}
+			else if(ch.getNodeType() == Node.TEXT_NODE && ch.getNodeValue().trim().length() !=0){
+				if(ch.getParentNode().getNodeName() == "img"){
+					System.out.println("Now not implement");
+				}
+				else if(ch.getParentNode().getNodeName() == "name"){
+					ch.setNodeValue(NameText.getText());
+				}
+			}
+		}
+	}
+
 	public void openImage(ActionEvent ev){
 		FileChooser fc = new FileChooser();
 		fc.getExtensionFilters().addAll(
