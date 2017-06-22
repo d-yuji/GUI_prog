@@ -17,33 +17,38 @@ import org.xml.sax.SAXException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
 public class ListScene extends AbstractScene{
 	FileChooser fc = new FileChooser();
+	@FXML Hyperlink GUI;
+	@FXML TabPane tabParent;
 
-	@FXML Button Content1;
-	@FXML Button Content2;
-	@FXML Button Content3;
-	@FXML Button Content4;
-	@FXML TextArea text;
-	@FXML TextArea text2;
-	@FXML GridPane gridPane;
-	@FXML MenuItem idOpen;
-	@FXML MenuItem idClose;
-	@FXML TabPane tab;
-	@FXML AnchorPane xmlTab;
+	@FXML
+	public void addTab(ActionEvent ev){
+		Tab addTab = new Tab("test");
+		AnchorPane pane = new AnchorPane();
+		SplitPane spane = new SplitPane();
+		spane.getItems().addAll(new Label("test1"), new Label("test2"));
+		spane.setDividerPositions(100, 200);
+		pane.getChildren().add(spane);
+		addTab.setContent(pane);
+		tabParent.getTabs().add(addTab);
 
+		return;
+	}
+
+	/*
 	@FXML
 	public void doAction(ActionEvent ev){
 
@@ -60,6 +65,7 @@ public class ListScene extends AbstractScene{
 		//System.out.println("Hello World");
 		return;
 	}
+	*/
 	@FXML
 	public void changeScene(ActionEvent ev){
 		try{
@@ -75,6 +81,7 @@ public class ListScene extends AbstractScene{
 		File dirPath = new File(url);
 		File[] files = dirPath.listFiles();
 		String loadtext;
+		Label text = new Label();
 		int i = 0;
 		while(files.length>i){
 			try {
@@ -88,6 +95,7 @@ public class ListScene extends AbstractScene{
 		}
 		return;
 	}
+	/*
 	public void openFile(ActionEvent ev){
 		System.out.println("open");
 		File openFile = fc.showOpenDialog(MainWindow.singleton.stage);
@@ -103,10 +111,11 @@ public class ListScene extends AbstractScene{
 		}
 		return;
 	}
-
+	*/
 	public void loadXML(ActionEvent ev) throws ParserConfigurationException, FileNotFoundException, SAXException, IOException{
 			String url = "src/bookdata/xml";
 			VBox box = new VBox();
+			Pane xmlTab = new Pane();
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document doc = db.parse(new FileInputStream(url+"/data_1.xml"));

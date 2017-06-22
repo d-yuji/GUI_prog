@@ -11,80 +11,54 @@
    <children>
       <BorderPane prefHeight="648.0" prefWidth="1154.0">
          <left>
-            <Accordion BorderPane.alignment="CENTER">
+            <Accordion fx:id="bookdatelist" onMouseClicked="#changeScene" BorderPane.alignment="CENTER">
               <panes>
-                <TitledPane animated="false" text="List1">
+                <TitledPane animated="false" text="BookList">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <GridPane fx:id="gridPane">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="50.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Button fx:id="Content1" mnemonicParsing="false" onAction="#Load" text="LoadData" GridPane.columnIndex="1" />
-                                    <Button fx:id="Content2" mnemonicParsing="false" onAction="#doAction" text="AddButton" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Button fx:id="Content3" mnemonicParsing="false" onAction="#changeScene" text="MoveContent" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <Button fx:id="Content4" mnemonicParsing="false" onAction="#loadXML" text="ReadXML" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Button mnemonicParsing="false" text="Button5" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                 </children>
-                              </GridPane>
+                              <Hyperlink layoutX="37.0" layoutY="37.0" text="Design" />
+                              <Hyperlink fx:id="GUI" layoutX="37.0" layoutY="14.0" onAction="#addTab" text="GUI" />
                            </children>
                         </AnchorPane>
                   </content>
                 </TitledPane>
-                <TitledPane animated="false" text="List2">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                  </content>
-                </TitledPane>
-                <TitledPane animated="false" text="List3">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                  </content>
-                </TitledPane>
+                  <TitledPane animated="false" text="Data">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </TitledPane>
               </panes>
             </Accordion>
          </left>
          <center>
-            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <TabPane fx:id="tabParent" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
-                <Tab text="Open_text">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <Tab text="GUI">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TextArea fx:id="text" layoutX="14.0" layoutY="14.0" prefHeight="518.0" prefWidth="744.0" text="test1" />
+                              <SplitPane dividerPositions="0.19716885743174925" prefHeight="593.0" prefWidth="991.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <ScrollPane prefHeight="591.0" prefWidth="751.0">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="702.0" prefWidth="740.0" />
+                                            </content>
+                                          </ScrollPane>
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
                            </children>
                         </AnchorPane>
-                  </content>
-                </Tab>
-                <Tab text="Open">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <TextArea layoutX="14.0" layoutY="14.0" prefHeight="518.0" prefWidth="744.0" text="text2" />
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
+                    </content>
+                  </Tab>
                   <Tab text="XML_Data">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" fx:id="xmlTab">
-                           <children>
-                              <VBox layoutX="208.0" layoutY="8.0" prefHeight="563.0" prefWidth="405.0" />
-                           </children>
-                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" fx:id="xmlTab" />
                      </content>
                   </Tab>
               </tabs>
@@ -95,9 +69,8 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                        <MenuItem fx:id="idOpen" mnemonicParsing="false" onAction="#openFile" text="Open" />
+                        <MenuItem fx:id="idOpen" mnemonicParsing="false" text="Open" />
                         <MenuItem mnemonicParsing="false" text="New File" />
-                        <MenuItem mnemonicParsing="false" text="Save" />
                     <MenuItem fx:id="idClose" mnemonicParsing="false" onAction="#closeEvent" text="Close" />
                   </items>
                 </Menu>
@@ -111,11 +84,6 @@
                     <MenuItem mnemonicParsing="false" text="About" />
                   </items>
                 </Menu>
-                  <Menu mnemonicParsing="false" text="Unspecified Menu">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                    </items>
-                  </Menu>
               </menus>
             </MenuBar>
          </top>
