@@ -16,6 +16,7 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -24,7 +25,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -37,10 +37,31 @@ public class ListScene extends AbstractScene{
 	@FXML
 	public void addTab(ActionEvent ev){
 		Tab addTab = new Tab("test");
-		AnchorPane pane = new AnchorPane();
+		VBox pane = new VBox();
+		Hyperlink close = new Hyperlink("close");
+		Hyperlink edit = new Hyperlink("edit");
+
+		close.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				System.out.println("close");
+				tabParent.getTabs().remove(addTab);
+			}
+		});
+
+		edit.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				MainWindow.singleton.changePage(SceneState.CONTENT);
+			}
+		});
+
+		pane.getChildren().add(edit);
+		pane.getChildren().add(close);
+
 		SplitPane spane = new SplitPane();
 		spane.getItems().addAll(new Label("test1"), new Label("test2"));
-		spane.setDividerPositions(100, 200);
+		spane.setDividerPositions(0, 1);
 		pane.getChildren().add(spane);
 		addTab.setContent(pane);
 		tabParent.getTabs().add(addTab);
@@ -48,24 +69,10 @@ public class ListScene extends AbstractScene{
 		return;
 	}
 
-	/*
-	@FXML
-	public void doAction(ActionEvent ev){
-
-		try {
-			Button btn = new Button();
-			btn.setText("add");
-			gridPane.getChildren().add( btn);
-			System.out.println("add");
-			MainWindow.singleton.ShowStage();
-		} catch (Exception e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-		//System.out.println("Hello World");
+	public void closeTab(){
+		System.out.println("close");
 		return;
 	}
-	*/
 	@FXML
 	public void changeScene(ActionEvent ev){
 		try{
