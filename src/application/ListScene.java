@@ -20,6 +20,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -27,6 +28,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -107,15 +109,18 @@ public class ListScene extends AbstractScene{
 		}
 		return;
 	}
-	/*
+
 	public void openFile(ActionEvent ev){
 		System.out.println("open");
 		File openFile = fc.showOpenDialog(MainWindow.singleton.stage);
 		System.out.println(openFile.getPath());
+		VBox box = new VBox();
+		Label text=new Label();
 		try {
 			String loadtext = new Scanner(openFile).useDelimiter("\\Z").next();
 			System.out.println(loadtext);
 			text.setText(loadtext);
+			box.getChildren().add(text);
 			//TODO フォーカスされていないタブのテキストエリアに書き込みをしようとするとエラーが発生する
 		} catch (FileNotFoundException e) {
 			// TODO 自動生成された catch ブロック
@@ -123,7 +128,7 @@ public class ListScene extends AbstractScene{
 		}
 		return;
 	}
-	*/
+
 	public void loadXML(ActionEvent ev) throws ParserConfigurationException, FileNotFoundException, SAXException, IOException{
 			String url = "src/bookdata/xml";
 			VBox box = new VBox();
@@ -178,6 +183,7 @@ public class ListScene extends AbstractScene{
 		int len = files.length;
 		BookListPane.getChildren().clear();
 		System.out.println(len);
+
 		for(int i =0;i<len;i++){
 			System.out.println(files[i].toString());
 			Hyperlink booklink = new Hyperlink(files[i].getName());
@@ -185,9 +191,19 @@ public class ListScene extends AbstractScene{
 					@Override
 					public void handle(ActionEvent e) {
 						Tab addTab = new Tab(booklink.getText());
-						VBox pane = new VBox();
+						VBox vbox = new VBox();
 						Hyperlink close = new Hyperlink("close");
 						Hyperlink edit = new Hyperlink("edit");
+						Hyperlink open = new Hyperlink("open");
+
+						open.setOnAction(new EventHandler<ActionEvent>(){
+							@Override
+							public void handle(ActionEvent event) {
+								// TODO 自動生成されたメソッド・スタブ
+								ListScene.this.openFile(event);
+							}
+
+						});
 
 						close.setOnAction(new EventHandler<ActionEvent>() {
 							@Override
@@ -204,14 +220,26 @@ public class ListScene extends AbstractScene{
 							}
 						});
 
-						pane.getChildren().add(edit);
-						pane.getChildren().add(close);
-
-						SplitPane spane = new SplitPane();
-						spane.getItems().addAll(new Label("test1"), new Label("test2"));
-						spane.setDividerPositions(0, 1);
-						pane.getChildren().add(spane);
-						addTab.setContent(pane);
+						vbox.getChildren().add(edit);
+						vbox.getChildren().add(close);
+						vbox.getChildren().add(open);
+						BorderPane bpane = new BorderPane();
+						ScrollPane spane=new ScrollPane();
+						spane.setContent(vbox);
+						bpane.setLeft(spane);
+						bpane.setCenter(new ScrollPane(new Label("data")));
+						VBox xmlBox = new VBox();
+						try{
+							DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+							DocumentBuilder db = dbf.newDocumentBuilder();
+							Document doc = db.parse(new FileInputStream(url+"/"+booklink.getText()));
+							Element root = doc.getDocumentElement();
+							walkXML(xmlBox,root);
+							bpane.setCenter(xmlBox);
+						}catch (Exception error){
+							error.printStackTrace();
+						}
+						addTab.setContent(bpane);
 						tabParent.getTabs().add(addTab);
 				}
 			});

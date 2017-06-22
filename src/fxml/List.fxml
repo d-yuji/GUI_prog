@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.web.*?>
 <?import javafx.scene.media.*?>
 <?import javafx.scene.image.*?>
@@ -24,7 +25,10 @@
                 </TitledPane>
                   <TitledPane animated="false" text="Data">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Hyperlink text="data show" />
+                           </children></AnchorPane>
                     </content>
                   </TitledPane>
               </panes>
@@ -61,7 +65,30 @@
                   </Tab>
                   <Tab text="XML_Data">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" fx:id="xmlTab" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" fx:id="xmlTab">
+                           <children>
+                              <BorderPane layoutX="14.0" layoutY="14.0" prefHeight="594.0" prefWidth="952.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <left>
+                                    <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label layoutX="42.0" layoutY="14.0" text="reading Data" />
+                                       </children></Pane>
+                                 </left>
+                                 <center>
+                                    <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <content>
+                                          <LineChart>
+                                            <xAxis>
+                                              <CategoryAxis side="BOTTOM" />
+                                            </xAxis>
+                                            <yAxis>
+                                              <NumberAxis side="LEFT" />
+                                            </yAxis>
+                                          </LineChart>
+                                       </content></ScrollPane>
+                                 </center>
+                              </BorderPane>
+                           </children></AnchorPane>
                      </content>
                   </Tab>
               </tabs>
@@ -70,18 +97,19 @@
          <top>
             <MenuBar BorderPane.alignment="CENTER">
               <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu mnemonicParsing="false" text="List">
                   <items>
-                        <MenuItem fx:id="idOpen" mnemonicParsing="false" text="Open" />
-                        <MenuItem mnemonicParsing="false" text="New File" />
+                        <MenuItem mnemonicParsing="false" text="New List" />
+                        <MenuItem mnemonicParsing="false" text="Import List" />
+                    <MenuItem mnemonicParsing="false" text="Delete List" />
                     <MenuItem fx:id="idClose" mnemonicParsing="false" onAction="#closeEvent" text="Close" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
+                  <Menu mnemonicParsing="false" text="Data">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Nothing" />
+                    </items>
+                  </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
                     <MenuItem mnemonicParsing="false" text="About" />
