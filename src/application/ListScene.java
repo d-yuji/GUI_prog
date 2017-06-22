@@ -23,8 +23,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -33,6 +35,9 @@ public class ListScene extends AbstractScene{
 	FileChooser fc = new FileChooser();
 	@FXML Hyperlink GUI;
 	@FXML TabPane tabParent;
+	@FXML TitledPane BookList;
+	@FXML Pane BookListPane;
+	 String url = "src/bookdata/xml";
 
 	@FXML
 	public void addTab(ActionEvent ev){
@@ -165,6 +170,55 @@ public class ListScene extends AbstractScene{
 	public void initialize() {
 
 	}
+	@FXML
+		private void TitledPaneClick(MouseEvent event) {
+		File dirPath = new File(url);
+		File[] files = dirPath.listFiles();
+		VBox box = new VBox();
+		int len = files.length;
+		BookListPane.getChildren().clear();
+		System.out.println(len);
+		for(int i =0;i<len;i++){
+			System.out.println(files[i].toString());
+			Hyperlink booklink = new Hyperlink(files[i].getName());
+			booklink.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent e) {
+						Tab addTab = new Tab(booklink.getText());
+						VBox pane = new VBox();
+						Hyperlink close = new Hyperlink("close");
+						Hyperlink edit = new Hyperlink("edit");
 
+						close.setOnAction(new EventHandler<ActionEvent>() {
+							@Override
+							public void handle(ActionEvent e) {
+								System.out.println("close");
+								tabParent.getTabs().remove(addTab);
+							}
+						});
+
+						edit.setOnAction(new EventHandler<ActionEvent>() {
+							@Override
+							public void handle(ActionEvent e) {
+								MainWindow.singleton.changePage(SceneState.CONTENT);
+							}
+						});
+
+						pane.getChildren().add(edit);
+						pane.getChildren().add(close);
+
+						SplitPane spane = new SplitPane();
+						spane.getItems().addAll(new Label("test1"), new Label("test2"));
+						spane.setDividerPositions(0, 1);
+						pane.getChildren().add(spane);
+						addTab.setContent(pane);
+						tabParent.getTabs().add(addTab);
+				}
+			});
+			box.getChildren().add(booklink);
+		}
+		BookListPane.getChildren().add(box);
+		System.out.println("Mouse clicked");
+	}
 
 }

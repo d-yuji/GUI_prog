@@ -11,14 +11,13 @@
    <children>
       <BorderPane prefHeight="648.0" prefWidth="1154.0">
          <left>
-            <Accordion fx:id="bookdatelist" onMouseClicked="#changeScene" BorderPane.alignment="CENTER">
+            <Accordion onMouseClicked="#changeScene" BorderPane.alignment="CENTER">
               <panes>
-                <TitledPane animated="false" text="BookList">
+                <TitledPane fx:id="BookList" animated="false" onMouseClicked="#TitledPaneClick" text="BookList">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Hyperlink layoutX="37.0" layoutY="37.0" text="Design" />
-                              <Hyperlink fx:id="GUI" layoutX="37.0" layoutY="14.0" onAction="#addTab" text="GUI" />
+                              <Pane fx:id="BookListPane" prefHeight="572.0" prefWidth="200.0" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -40,7 +39,11 @@
                            <children>
                               <SplitPane dividerPositions="0.19716885743174925" prefHeight="593.0" prefWidth="991.0">
                                 <items>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <Hyperlink layoutX="43.0" layoutY="33.0" text="Design" />
+                                          <Hyperlink fx:id="GUI" layoutX="51.0" layoutY="87.0" onAction="#addTab" text="GUI" />
+                                       </children></AnchorPane>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
                                           <ScrollPane prefHeight="591.0" prefWidth="751.0">
