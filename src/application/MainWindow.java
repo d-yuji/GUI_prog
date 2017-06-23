@@ -52,6 +52,30 @@ public class MainWindow extends Application {
 		setPage(pageIndex);
 	}
 
+	public void changePage(SceneState next,String filename){
+		state = next;
+		switch (next){
+			case ADD:
+				pageIndex = 0;
+				break;
+			case CONTENT:
+				pageIndex = 1;
+				ContentScene.filename = filename;
+				break;
+			case EDIT:
+				pageIndex = 2;
+				break;
+			case LIST:
+				pageIndex = 3;
+				break;
+			case STARTER:
+				pageIndex = 4;
+				break;
+		}
+		setPage(pageIndex);
+	}
+
+
 	private void setPage(int nextIndex){
 		try{
 			root = FXMLLoader.load(getClass().getResource("../fxml/"+PAGE[nextIndex]+".fxml"));
