@@ -3,14 +3,20 @@ package application;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Scanner;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.soap.Node;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
+import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
@@ -20,10 +26,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,6 +47,8 @@ public class ListScene extends AbstractScene{
 	@FXML TabPane tabParent;
 	@FXML TitledPane BookList;
 	@FXML Pane BookListPane;
+	@FXML MenuItem newdata;
+
 	 String url = "src/bookdata/xml";
 
 	@FXML
@@ -76,10 +86,6 @@ public class ListScene extends AbstractScene{
 		return;
 	}
 
-	public void closeTab(){
-		System.out.println("close");
-		return;
-	}
 	@FXML
 	public void changeScene(ActionEvent ev){
 		try{
@@ -89,6 +95,7 @@ public class ListScene extends AbstractScene{
 		}
 		return;
 	}
+	/*
 	@FXML
 	public void Load(ActionEvent ev){
 		String url = "src/bookdata/txt";
@@ -108,8 +115,8 @@ public class ListScene extends AbstractScene{
 			i++;
 		}
 		return;
-	}
-
+	}*/
+	/*
 	public void openFile(ActionEvent ev){
 		System.out.println("open");
 		File openFile = fc.showOpenDialog(MainWindow.singleton.stage);
@@ -127,18 +134,18 @@ public class ListScene extends AbstractScene{
 			e.printStackTrace();
 		}
 		return;
-	}
+	}*/
 
 	public void loadXML(ActionEvent ev) throws ParserConfigurationException, FileNotFoundException, SAXException, IOException{
 			String url = "src/bookdata/xml";
 			VBox box = new VBox();
-			Pane xmlTab = new Pane();
+			Pane xmlPane = new Pane();
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document doc = db.parse(new FileInputStream(url+"/data_1.xml"));
 			Element root = doc.getDocumentElement();
 			walkXML(box,root);
-			xmlTab.getChildren().add(box);
+			xmlPane.getChildren().add(box);
 	}
 
 	public void walkXML(VBox box, org.w3c.dom.Node node){
@@ -164,47 +171,72 @@ public class ListScene extends AbstractScene{
 		}
 	}
 
+	@FXML
+	public void addNewBookXML(ActionEvent ev) throws ParserConfigurationException, FileNotFoundException, TransformerException{
+		TextInputDialog textIn  = new TextInputDialog( "book_data" );
+		textIn.setContentText("type new file name");
+		textIn.setHeaderText("New File");
+		textIn.setTitle("New Data File");
+		String filename = textIn.showAndWait().orElse("");
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+
+		DOMImplementation domImpl=builder.getDOMImplementation();
+		Document document = domImpl.createDocument("","root",null);
+
+		TransformerFactory transFactory = TransformerFactory.newInstance();
+		Transformer transformer = transFactory.newTransformer();
+		DOMSource source = new DOMSource(document);
+		File newXML = new File(url+"/"+filename+".xml");
+		FileOutputStream os = new FileOutputStream(newXML);
+		StreamResult result = new StreamResult(os);
+		transformer.transform(source, result);
+		System.out.println(filename);
+	}
 
 	@Override
 	public void closeEvent(ActionEvent ev){
 		System.exit(0);
 		return;
 	}
-
 	@Override
 	public void initialize() {
 
 	}
+
 	@FXML
-		private void TitledPaneClick(MouseEvent event) {
+	private void TitledPaneClick(MouseEvent event) {
 		File dirPath = new File(url);
 		File[] files = dirPath.listFiles();
-		VBox box = new VBox();
+		VBox booklinkBox = new VBox();
 		int len = files.length;
 		BookListPane.getChildren().clear();
-		System.out.println(len);
 
-		for(int i =0;i<len;i++){
-			System.out.println(files[i].toString());
+		for(int i =0; i<len; i++){
 			Hyperlink booklink = new Hyperlink(files[i].getName());
+
 			booklink.setOnAction(new EventHandler<ActionEvent>() {
+					String filename = booklink.getText();
 					@Override
 					public void handle(ActionEvent e) {
-						Tab addTab = new Tab(booklink.getText());
-						VBox vbox = new VBox();
-						Hyperlink close = new Hyperlink("close");
+						Tab addTab = new Tab(filename);
+						VBox controllVBox = new VBox();
 						Hyperlink edit = new Hyperlink("edit");
-						Hyperlink open = new Hyperlink("open");
+						Hyperlink close = new Hyperlink("close");
+//						Hyperlink open = new Hyperlink("open");
 
-						open.setOnAction(new EventHandler<ActionEvent>(){
+						BorderPane bpane = new BorderPane();
+						ScrollPane spane=new ScrollPane();
+						VBox xmlBox = new VBox();
+						ScrollPane scPane = new ScrollPane(new Label("data"));
+
+/*						open.setOnAction(new EventHandler<ActionEvent>(){
 							@Override
 							public void handle(ActionEvent event) {
-								// TODO 自動生成されたメソッド・スタブ
-								ListScene.this.openFile(event);
+
 							}
-
 						});
-
+*/
 						close.setOnAction(new EventHandler<ActionEvent>() {
 							@Override
 							public void handle(ActionEvent e) {
@@ -220,33 +252,32 @@ public class ListScene extends AbstractScene{
 							}
 						});
 
-						vbox.getChildren().add(edit);
-						vbox.getChildren().add(close);
-						vbox.getChildren().add(open);
-						BorderPane bpane = new BorderPane();
-						ScrollPane spane=new ScrollPane();
-						spane.setContent(vbox);
+						controllVBox.getChildren().add(edit);
+						controllVBox.getChildren().add(close);
+//						controllVBox.getChildren().add(open);
+
+						spane.setContent(controllVBox);
 						bpane.setLeft(spane);
-						bpane.setCenter(new ScrollPane(new Label("data")));
-						VBox xmlBox = new VBox();
+						bpane.setCenter(scPane);
+
 						try{
 							DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 							DocumentBuilder db = dbf.newDocumentBuilder();
 							Document doc = db.parse(new FileInputStream(url+"/"+booklink.getText()));
 							Element root = doc.getDocumentElement();
 							walkXML(xmlBox,root);
-							bpane.setCenter(xmlBox);
+							scPane.setContent(xmlBox);
 						}catch (Exception error){
 							error.printStackTrace();
 						}
+
+						bpane.setCenter(scPane);
 						addTab.setContent(bpane);
 						tabParent.getTabs().add(addTab);
 				}
 			});
-			box.getChildren().add(booklink);
+			booklinkBox.getChildren().add(booklink);
 		}
-		BookListPane.getChildren().add(box);
-		System.out.println("Mouse clicked");
+		BookListPane.getChildren().add(booklinkBox);
 	}
-
 }
