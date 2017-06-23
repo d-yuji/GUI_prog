@@ -182,7 +182,21 @@ public class ListScene extends AbstractScene{
 		DocumentBuilder builder = factory.newDocumentBuilder();
 
 		DOMImplementation domImpl=builder.getDOMImplementation();
-		Document document = domImpl.createDocument("","root",null);
+		Document document = domImpl.createDocument("","book",null);
+
+		Element book=document.getDocumentElement();
+		Element name=document.createElement("name");
+		book.appendChild(name);
+		Element author=document.createElement("author");
+		book.appendChild(author);
+		Element publisher=document.createElement("publisher");
+		book.appendChild(publisher);
+		Element img=document.createElement("img");
+		book.appendChild(img);
+		Element page=document.createElement("page");
+		book.appendChild(page);
+		Element memo=document.createElement("memo");
+		book.appendChild(memo);
 
 		TransformerFactory transFactory = TransformerFactory.newInstance();
 		Transformer transformer = transFactory.newTransformer();
@@ -191,6 +205,7 @@ public class ListScene extends AbstractScene{
 		FileOutputStream os = new FileOutputStream(newXML);
 		StreamResult result = new StreamResult(os);
 		transformer.transform(source, result);
+		TitledPaneClick(new MouseEvent(null, 0, 0, 0, 0, null, 0, false, false, false, false, false, false, false, false, false, false, null));
 		System.out.println(filename);
 	}
 
