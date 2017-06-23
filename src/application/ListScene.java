@@ -48,7 +48,7 @@ public class ListScene extends AbstractScene{
 	@FXML TitledPane BookList;
 	@FXML Pane BookListPane;
 	@FXML MenuItem newdata;
-
+	ContentScene cs = new ContentScene();
 	 String url = "src/bookdata/xml";
 
 	@FXML
@@ -150,7 +150,7 @@ public class ListScene extends AbstractScene{
 
 	public void walkXML(VBox box, org.w3c.dom.Node node){
 		for(org.w3c.dom.Node ch = node.getFirstChild(); ch != null; ch = ch.getNextSibling()){
-			System.out.println(ch.getNodeName()+"::");
+			//System.out.println(ch.getNodeName()+"::");
 			if(ch.getNodeType() == Node.ELEMENT_NODE){
 				box.getChildren().add(new Label(ch.getNodeName()));
 				walkXML(box,ch);
@@ -158,7 +158,7 @@ public class ListScene extends AbstractScene{
 			else if(ch.getNodeType() == Node.TEXT_NODE && ch.getNodeValue().trim().length() !=0){
 				if(ch.getParentNode().getNodeName() == "img"){
 					Image img = new Image(ch.getNodeValue());
-					System.out.println(ch.getNodeValue());
+					//System.out.println(ch.getNodeValue());
 					ImageView imageView = new ImageView(img);
 					imageView.setFitHeight(300);
 					imageView.setFitWidth(200);
@@ -263,7 +263,8 @@ public class ListScene extends AbstractScene{
 						edit.setOnAction(new EventHandler<ActionEvent>() {
 							@Override
 							public void handle(ActionEvent e) {
-								MainWindow.singleton.changePage(SceneState.CONTENT);
+								MainWindow.singleton.changePage(SceneState.CONTENT,filename);
+								System.out.println("change");
 							}
 						});
 
