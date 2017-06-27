@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <book>
-	<name>タイトル書き換え</name>
-	<author/>
-	<publisher>a</publisher>
+	<name>javaで学ぶデザインパターン</name>
+	<author>結城浩</author>
+	<publisher>ソフトバンククリエイティブ</publisher>
 	<img>bookdata/images/bookImage_1.png</img>
-	<page>a</page>
+	<page>0120</page>
 	<memo>aaaaaaaaaaaaaaa
 		aaaaaaaaaaaaaaaaaaaaa
 		aaaaaaaaaaaaaaaa

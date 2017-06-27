@@ -51,17 +51,21 @@ public class ContentScene {
 	@FXML TextField PublisherText;
 	@FXML TextArea MemoText;
 
-	public void backButton(ActionEvent ev){
+	@FXML
+	private void backButton(ActionEvent ev){
 		MainWindow.singleton.changePage(SceneState.LIST);
 		return;
 	}
-	public void saveAllText(ActionEvent ev) throws FileNotFoundException, SAXException, IOException, ParserConfigurationException, TransformerException{
 
+	@FXML
+	private void saveAllText(ActionEvent ev) throws FileNotFoundException, SAXException, IOException, ParserConfigurationException, TransformerException{
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = dbf.newDocumentBuilder();
 		Document doc = db.parse(new FileInputStream(url+ "/"+filename));
 		Element root = doc.getDocumentElement();
-		walkXML(root);
+
+		walkwriteXML(root);
+
 		TransformerFactory tff = TransformerFactory.newInstance();
 		Transformer tf = tff.newTransformer();
 		tf.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
@@ -71,12 +75,12 @@ public class ContentScene {
 		return;
 	}
 
-	public void walkXML(org.w3c.dom.Node node){
+	private void walkwriteXML(org.w3c.dom.Node node){
 		System.out.println("start walking");
 		for(org.w3c.dom.Node ch = node.getFirstChild(); ch != null; ch = ch.getNextSibling()){
 			if(ch.getNodeType() == Node.ELEMENT_NODE){
 				if(ch.getFirstChild() != null){
-					walkXML(ch);
+					walkwriteXML(ch);
 				}else{
 					switch(ch.getNodeName()){
 					case "name":
@@ -102,7 +106,6 @@ public class ContentScene {
 			else if(ch.getNodeType() == Node.TEXT_NODE && ch.getNodeValue().trim().length() !=0){
 				switch(ch.getParentNode().getNodeName()){
 					case "name":
-						System.out.println(NameText.getText());
 						ch.setNodeValue(NameText.getText());
 						break;
 					case "author":
@@ -123,8 +126,8 @@ public class ContentScene {
 			}
 		}
 	}
-	public void walkloadXML(org.w3c.dom.Node node){
-		System.out.println("start loading");
+
+	private void walkloadXML(org.w3c.dom.Node node){
 		for(org.w3c.dom.Node ch = node.getFirstChild(); ch != null; ch = ch.getNextSibling()){
 			if(ch.getNodeType() == Node.ELEMENT_NODE){
 				walkloadXML(ch);
@@ -133,7 +136,6 @@ public class ContentScene {
 				switch(ch.getParentNode().getNodeName()){
 					case "name":
 						NameText.setText(ch.getNodeValue());
-						System.out.println(ch.getNodeValue());
 						break;
 					case "author":
 						AuthorText.setText(ch.getNodeValue());
@@ -154,9 +156,8 @@ public class ContentScene {
 		}
 	}
 
-
-
-	public void openImage(ActionEvent ev){
+	@FXML
+	private void openImage(ActionEvent ev){
 		FileChooser fc = new FileChooser();
 		fc.getExtensionFilters().addAll(
 				new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"),
@@ -170,22 +171,24 @@ public class ContentScene {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-
 		return;
 	}
+
 	@FXML
-	public void initialize() throws ParserConfigurationException, FileNotFoundException, SAXException, IOException{
-		System.out.println("initialize");
-		System.out.println(url+"/"+filename);
+	private void initialize() throws ParserConfigurationException, FileNotFoundException, SAXException, IOException{
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = dbf.newDocumentBuilder();
 		Document doc = db.parse(new FileInputStream(url+ "/"+filename));
 		Element root = doc.getDocumentElement();
 		walkloadXML(root);
 	}
+
+	@FXML
 	public void SaveImage(ActionEvent ev){
 		return;
 	}
+
+
 	public void undo(ActionEvent ev){
 		return;
 	}
