@@ -68,8 +68,8 @@ public class ListScene{
 				if(ch.getParentNode().getNodeName() == "img"){
 					Image img = new Image(ch.getNodeValue());
 					ImageView imageView = new ImageView(img);
-					imageView.setFitHeight(300);
-					imageView.setFitWidth(200);
+					imageView.setFitHeight(img.getHeight()*0.5);
+					imageView.setFitWidth(img.getWidth()*0.5);
 					box.getChildren().add(imageView);
 				}
 				else{

@@ -3,7 +3,7 @@
 <name>新規サンプル</name>
 <author>新規サンプル</author>
 <publisher>新規サンプル</publisher>
-<img/>
+<img>bookdata/images/book_data.xml.png</img>
 <page>新規サンプル</page>
 <memo>新規サンプル</memo>
 </book>

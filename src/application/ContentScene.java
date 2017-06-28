@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -20,6 +21,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -27,12 +29,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class ContentScene {
 	String url = "src/bookdata/xml";
+	String imageurl = "src/bookdata/images/";
+	String xmlurl = "bookdata/images/";
 	static String filename;
 	@FXML MenuItem BackListMenu;
 	@FXML MenuItem SaveAll;
@@ -75,6 +80,11 @@ public class ContentScene {
 		return;
 	}
 
+	private boolean saveImage(WritableImage img, String base, String fmt) throws IOException{
+		File newImagefile = new File(imageurl+base + "." + fmt);
+		return ImageIO.write(SwingFXUtils.fromFXImage(img, null), fmt, newImagefile);
+	}
+
 	private void walkwriteXML(org.w3c.dom.Node node){
 		System.out.println("start walking");
 		for(org.w3c.dom.Node ch = node.getFirstChild(); ch != null; ch = ch.getNextSibling()){
@@ -93,6 +103,14 @@ public class ContentScene {
 						ch.setTextContent(PublisherText.getText());
 						break;
 					case "img":
+						WritableImage writableImage = BookImage.snapshot(null, null);
+						try {
+							saveImage(writableImage,filename,"png");
+						} catch (IOException e) {
+							// TODO 自動生成された catch ブロック
+							e.printStackTrace();
+						}
+						ch.setTextContent(xmlurl+filename+".png");
 						break;
 					case "page":
 						ch.setTextContent(PageNum.getText());
@@ -115,6 +133,7 @@ public class ContentScene {
 						ch.setNodeValue(PublisherText.getText());
 						break;
 					case "img":
+
 						break;
 					case "page":
 						ch.setNodeValue(PageNum.getText());
@@ -144,6 +163,9 @@ public class ContentScene {
 						PublisherText.setText(ch.getNodeValue());
 						break;
 					case "img":
+						Image img = new Image(ch.getNodeValue());
+						BookImage.setImage(img);
+						ImageArea.setOpacity(0);
 						break;
 					case "page":
 						PageNum.setText(ch.getNodeValue());
