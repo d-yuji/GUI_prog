@@ -32,7 +32,6 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -113,7 +112,7 @@ public class ListScene{
 			FileOutputStream os = new FileOutputStream(newXML);
 			StreamResult result = new StreamResult(os);
 			transformer.transform(source, result);
-			TitledPaneClick(new MouseEvent(null, 0, 0, 0, 0, null, 0, false, false, false, false, false, false, false, false, false, false, null));
+			initialize();
 		}
 		System.out.println(filename);
 	}
@@ -124,7 +123,7 @@ public class ListScene{
 	}
 
 	@FXML
-	private void TitledPaneClick(MouseEvent event) {
+	private void initialize() {
 		File dirPath = new File(url);
 		File[] files = dirPath.listFiles();
 		VBox booklinkBox = new VBox();
@@ -143,7 +142,6 @@ public class ListScene{
 						Hyperlink edit = new Hyperlink("edit");
 						Hyperlink close = new Hyperlink("close");
 						BorderPane bpane = new BorderPane();
-						ScrollPane spane=new ScrollPane();
 						VBox xmlBox = new VBox();
 						ScrollPane scPane = new ScrollPane(new Label("data"));
 
@@ -167,10 +165,7 @@ public class ListScene{
 
 						controllVBox.getChildren().add(edit);
 						controllVBox.getChildren().add(close);
-
-						spane.setContent(controllVBox);
-						bpane.setLeft(spane);
-						bpane.setCenter(scPane);
+						bpane.setLeft(controllVBox);
 
 						try{
 							DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
