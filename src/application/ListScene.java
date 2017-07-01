@@ -142,7 +142,6 @@ public class ListScene{
 						Hyperlink edit = new Hyperlink("edit");
 						Hyperlink close = new Hyperlink("close");
 						BorderPane bpane = new BorderPane();
-						ScrollPane spane=new ScrollPane();
 						VBox xmlBox = new VBox();
 						ScrollPane scPane = new ScrollPane(new Label("data"));
 
@@ -166,10 +165,7 @@ public class ListScene{
 
 						controllVBox.getChildren().add(edit);
 						controllVBox.getChildren().add(close);
-
-						spane.setContent(controllVBox);
-						bpane.setLeft(spane);
-						bpane.setCenter(scPane);
+						bpane.setLeft(controllVBox);
 
 						try{
 							DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
