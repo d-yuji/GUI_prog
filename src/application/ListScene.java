@@ -33,7 +33,6 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
@@ -42,7 +41,7 @@ public class ListScene{
 	@FXML Hyperlink GUI;
 	@FXML TabPane tabParent;
 	@FXML TitledPane BookList;
-	@FXML Pane BookListPane;
+	@FXML VBox BookListPane;
 	@FXML MenuItem newdata;
 	 String url = "src/bookdata/xml";
 
@@ -112,7 +111,8 @@ public class ListScene{
 			FileOutputStream os = new FileOutputStream(newXML);
 			StreamResult result = new StreamResult(os);
 			transformer.transform(source, result);
-			initialize();
+			Hyperlink booklink = new Hyperlink(filename+".xml");
+			BookListPane.getChildren().add(setTabLinkMethod(booklink));
 		}
 		System.out.println(filename);
 	}
@@ -132,59 +132,63 @@ public class ListScene{
 
 		for(int i =0; i<len; i++){
 			Hyperlink booklink = new Hyperlink(files[i].getName());
-
-			booklink.setOnAction(new EventHandler<ActionEvent>() {
-					String filename = booklink.getText();
-					@Override
-					public void handle(ActionEvent e) {
-						Tab addTab = new Tab(filename);
-						VBox controllVBox = new VBox();
-						Hyperlink edit = new Hyperlink("edit");
-						Hyperlink close = new Hyperlink("close");
-						BorderPane bpane = new BorderPane();
-						VBox xmlBox = new VBox();
-						ScrollPane scPane = new ScrollPane(new Label("data"));
-
-						booklink.setDisable(true);
-						close.setOnAction(new EventHandler<ActionEvent>() {
-							@Override
-							public void handle(ActionEvent e) {
-								System.out.println("close");
-								tabParent.getTabs().remove(addTab);
-								booklink.setDisable(false);
-							}
-						});
-
-						edit.setOnAction(new EventHandler<ActionEvent>() {
-							@Override
-							public void handle(ActionEvent e) {
-								MainWindow.singleton.changePage(SceneState.CONTENT,filename);
-								System.out.println("change");
-							}
-						});
-
-						controllVBox.getChildren().add(edit);
-						controllVBox.getChildren().add(close);
-						bpane.setLeft(controllVBox);
-
-						try{
-							DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-							DocumentBuilder db = dbf.newDocumentBuilder();
-							Document doc = db.parse(new FileInputStream(url+"/"+booklink.getText()));
-							Element root = doc.getDocumentElement();
-							walkXML(xmlBox,root);
-							scPane.setContent(xmlBox);
-						}catch (Exception error){
-							error.printStackTrace();
-						}
-
-						bpane.setCenter(scPane);
-						addTab.setContent(bpane);
-						tabParent.getTabs().add(addTab);
-				}
-			});
-			booklinkBox.getChildren().add(booklink);
+			booklinkBox.getChildren().add(setTabLinkMethod(booklink));
 		}
 		BookListPane.getChildren().add(booklinkBox);
 	}
+	
+	private Hyperlink setTabLinkMethod(Hyperlink link){
+		link.setOnAction(new EventHandler<ActionEvent>() {
+			String filename = link.getText();
+			@Override
+			public void handle(ActionEvent e) {
+				Tab addTab = new Tab(filename);
+				VBox controllVBox = new VBox();
+				Hyperlink edit = new Hyperlink("edit");
+				Hyperlink close = new Hyperlink("close");
+				BorderPane bpane = new BorderPane();
+				VBox xmlBox = new VBox();
+				ScrollPane scPane = new ScrollPane(new Label("data"));
+
+				link.setDisable(true);
+				close.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent e) {
+						System.out.println("close");
+						tabParent.getTabs().remove(addTab);
+						link.setDisable(false);
+					}
+				});
+
+				edit.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent e) {
+						MainWindow.singleton.changePage(SceneState.CONTENT,filename);
+						System.out.println("change");
+						}
+				});
+
+				controllVBox.getChildren().add(edit);
+				controllVBox.getChildren().add(close);
+				bpane.setLeft(controllVBox);
+
+				try{
+					DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+					DocumentBuilder db = dbf.newDocumentBuilder();
+					Document doc = db.parse(new FileInputStream(url+"/"+link.getText()));
+					Element root = doc.getDocumentElement();
+					walkXML(xmlBox,root);
+					scPane.setContent(xmlBox);
+				}catch (Exception error){
+					error.printStackTrace();
+				}
+
+				bpane.setCenter(scPane);
+				addTab.setContent(bpane);
+				tabParent.getTabs().add(addTab);
+			}
+		});
+		return link;
+	}
+
 }

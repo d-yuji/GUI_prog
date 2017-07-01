@@ -18,7 +18,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Pane fx:id="BookListPane" prefHeight="572.0" prefWidth="200.0" />
+                              <VBox fx:id="BookListPane" prefHeight="571.0" prefWidth="200.0" />
                            </children>
                         </AnchorPane>
                   </content>
