@@ -45,7 +45,6 @@ public class ListScene{
 	@FXML TitledPane BookList;
 	@FXML Pane BookListPane;
 	@FXML MenuItem newdata;
-	ContentScene cs = new ContentScene();
 	 String url = "src/bookdata/xml";
 
 	@FXML
@@ -148,11 +147,13 @@ public class ListScene{
 						VBox xmlBox = new VBox();
 						ScrollPane scPane = new ScrollPane(new Label("data"));
 
+						booklink.setDisable(true);
 						close.setOnAction(new EventHandler<ActionEvent>() {
 							@Override
 							public void handle(ActionEvent e) {
 								System.out.println("close");
 								tabParent.getTabs().remove(addTab);
+								booklink.setDisable(false);
 							}
 						});
 

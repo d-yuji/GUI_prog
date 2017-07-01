@@ -205,11 +205,6 @@ public class ContentScene {
 		walkloadXML(root);
 	}
 
-	@FXML
-	public void SaveImage(ActionEvent ev){
-		return;
-	}
-
 
 	public void undo(ActionEvent ev){
 		return;
